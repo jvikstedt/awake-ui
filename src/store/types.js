@@ -1,0 +1,2 @@
+export const ERROR_TRIGGERED = 'ERROR_TRIGGERED'
+export const CLEAR_FLASH = 'CLEAR_FLASH'

@@ -6,11 +6,22 @@
         Side
       </el-aside>
       <el-main>
+        <Flash />
         <router-view/>
       </el-main>
     </el-container>
   </el-container>
 </template>
+
+<script>
+import Flash from '@/common/Flash'
+
+export default {
+  components: {
+    Flash
+  }
+}
+</script>
 
 <style lang="scss">
   .el-aside {

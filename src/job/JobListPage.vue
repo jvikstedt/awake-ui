@@ -9,11 +9,11 @@
 <script>
 export default {
   created () {
-    this.$store.dispatch('jobFetchAll')
+    this.$store.dispatch('job/jobFetchAll')
   },
   computed: {
     jobs () {
-      return this.$store.state.jobs
+      return this.$store.state.job.jobs
     }
   }
 }
