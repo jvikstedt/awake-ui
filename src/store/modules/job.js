@@ -1,14 +1,16 @@
 import api from '@/api'
+import router from '@/router'
 
 import {
   ERROR_TRIGGERED
 } from '@/store/types'
 
+const JOB_RESET = 'JOB_RESET'
 const JOB_FETCH_ALL_SUCCESS = 'JOB_FETCH_ALL_SUCCESS'
 const JOB_FETCH_SUCCESS = 'JOB_FETCH_SUCCESS'
-const JOB_RESET = 'JOB_RESET'
 const JOB_CREATE_SUCCESS = 'JOB_CREATE_SUCCESS'
 const JOB_UPDATE_SUCCESS = 'JOB_UPDATE_SUCCESS'
+const JOB_DELETE_SUCCESS = 'JOB_DELETE_SUCCESS'
 
 const state = {
   jobs: [],
@@ -30,6 +32,9 @@ const mutations = {
   },
   [JOB_UPDATE_SUCCESS] (state, job) {
     state.job = job
+  },
+  [JOB_DELETE_SUCCESS] (state, job) {
+    state.jobs = state.jobs.filter(j => j.id !== job.id)
   }
 }
 
@@ -58,6 +63,7 @@ const actions = {
 
       commit(JOB_RESET)
       commit(JOB_CREATE_SUCCESS, job)
+      router.push('/jobs')
     } catch (e) {
       commit(ERROR_TRIGGERED, e, { root: true })
     }
@@ -68,6 +74,14 @@ const actions = {
 
       commit(JOB_RESET)
       commit(JOB_UPDATE_SUCCESS, job)
+    } catch (e) {
+      commit(ERROR_TRIGGERED, e, { root: true })
+    }
+  },
+  async jobDelete ({ commit, state }, jobID) {
+    try {
+      const response = await api.delete(`/jobs/${jobID}`)
+      commit(JOB_DELETE_SUCCESS, response)
     } catch (e) {
       commit(ERROR_TRIGGERED, e, { root: true })
     }

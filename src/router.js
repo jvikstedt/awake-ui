@@ -11,6 +11,11 @@ export default new Router({
   routes: [
     {
       path: '/',
+      name: 'home',
+      redirect: '/jobs'
+    },
+    {
+      path: '/jobs',
       name: 'jobs',
       component: JobListPage
     },
