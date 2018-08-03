@@ -1,10 +1,15 @@
 <template>
   <div>
-    {{ job.name }}
+    <JobForm v-if="job" :initialJob="job" @onSave="jobUpdate" />
   </div>
 </template>
 
 <script>
+import { createNamespacedHelpers } from 'vuex'
+import JobForm from '@/job/components/JobForm'
+
+const { mapActions } = createNamespacedHelpers('job')
+
 export default {
   created () {
     this.$store.dispatch('job/jobFetch', this.jobID)
@@ -16,6 +21,14 @@ export default {
     jobID () {
       return this.$route.params.id
     }
+  },
+  methods: {
+    ...mapActions([
+      'jobUpdate'
+    ])
+  },
+  components: {
+    JobForm
   }
 }
 </script>

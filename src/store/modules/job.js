@@ -6,10 +6,12 @@ import {
 
 const JOB_FETCH_ALL_SUCCESS = 'JOB_FETCH_ALL_SUCCESS'
 const JOB_FETCH_SUCCESS = 'JOB_FETCH_SUCCESS'
+const JOB_RESET = 'JOB_RESET'
+const JOB_UPDATE_SUCCESS = 'JOB_UPDATE_SUCCESS'
 
 const state = {
   jobs: [],
-  job: {}
+  job: null
 }
 
 const mutations = {
@@ -17,6 +19,12 @@ const mutations = {
     state.jobs = jobs
   },
   [JOB_FETCH_SUCCESS] (state, job) {
+    state.job = job
+  },
+  [JOB_RESET] (state) {
+    state.job = null
+  },
+  [JOB_UPDATE_SUCCESS] (state, job) {
     state.job = job
   }
 }
@@ -31,10 +39,21 @@ const actions = {
     }
   },
   async jobFetch ({ commit, state }, jobID) {
+    commit(JOB_RESET)
     try {
       const job = await api.get(`/jobs/${jobID}`)
 
       commit(JOB_FETCH_SUCCESS, job)
+    } catch (e) {
+      commit(ERROR_TRIGGERED, e, { root: true })
+    }
+  },
+  async jobUpdate ({ commit, state }, jobData) {
+    try {
+      const job = await api.put(`/jobs/${jobData.id}`, jobData)
+
+      commit(JOB_RESET)
+      commit(JOB_UPDATE_SUCCESS, job)
     } catch (e) {
       commit(ERROR_TRIGGERED, e, { root: true })
     }
