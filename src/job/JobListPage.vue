@@ -1,5 +1,9 @@
 <template>
   <div>
+    <el-button
+      size="mini"
+      @click="handleNew">New</el-button>
+
     <el-table
       :data="jobs"
       style="width: 100%">
@@ -45,6 +49,9 @@ export default {
     }
   },
   methods: {
+    handleNew () {
+      this.$router.push(`/jobs/new`)
+    },
     handleEdit (jobID) {
       this.$router.push(`/jobs/${jobID}/edit`)
     },
