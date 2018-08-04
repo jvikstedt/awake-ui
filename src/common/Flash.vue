@@ -1,14 +1,8 @@
 <template>
   <transition name="fade">
-    <el-alert
-      v-if="flash"
-      class="flash-message"
-      :title="flash.header"
-      :type="flash.status"
-      :description="flash.body"
-      show-icon
-      @close="removeFlash"
-    />
+    <v-alert v-if="flash" :value="flash" :type="flash.status" dismissible>
+      {{ flash.body }}
+    </v-alert>
   </transition>
 </template>
 

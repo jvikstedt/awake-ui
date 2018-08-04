@@ -1,40 +1,25 @@
 <template>
-  <div>
-    <el-button
-      size="mini"
-      @click="handleNew">New</el-button>
-
-    <el-table
-      :data="jobs"
-      style="width: 100%">
-      <el-table-column
-        label="Name"
-        width="180">
-        <template slot-scope="scope">
-          {{ scope.row.name }}
-        </template>
-      </el-table-column>
-      <el-table-column
-        label="Date"
-        width="180">
-        <template slot-scope="scope">
-          <i class="el-icon-time"></i>
-          <span style="margin-left: 10px">{{ scope.row.createdAt }}</span>
-        </template>
-      </el-table-column>
-      <el-table-column
-        label="Operations">
-        <template slot-scope="scope">
-          <el-button
-            size="mini"
-            @click="handleEdit(scope.row.id)">Edit</el-button>
-          <el-button
-            size="mini"
-            type="danger"
-            @click="handleDelete(scope.row.id)">Delete</el-button>
-        </template>
-      </el-table-column>
-    </el-table>
+  <div className="mt-5">
+    <v-toolbar flat color="white">
+      <v-toolbar-title>Jobs</v-toolbar-title>
+      <v-divider class="mx-2" inset vertical />
+      <v-spacer></v-spacer>
+      <v-btn color="primary" dark class="mb-2" @click="handleNew">New Job</v-btn>
+    </v-toolbar>
+    <v-data-table :headers="headers" :items="jobs" hide-actions class="elevation-1">
+      <template slot="items" slot-scope="props">
+        <td>{{ props.item.name }}</td>
+        <td>{{ props.item.createdAt }}</td>
+        <td class="">
+          <v-icon small class="mr-2" @click="editJob(props.item.id)">
+            edit
+          </v-icon>
+          <v-icon small @click="deleteJob(props.item.id)">
+            delete
+          </v-icon>
+        </td>
+      </template>
+    </v-data-table>
   </div>
 </template>
 
@@ -43,6 +28,13 @@ export default {
   created () {
     this.$store.dispatch('job/jobFetchAll')
   },
+  data: () => ({
+    headers: [
+      { text: 'Name', value: 'name' },
+      { text: 'CreatedAt', value: 'createdAt' },
+      { text: 'Actions', value: 'name', sortable: false }
+    ]
+  }),
   computed: {
     jobs () {
       return this.$store.state.job.jobs
@@ -52,10 +44,10 @@ export default {
     handleNew () {
       this.$router.push(`/jobs/new`)
     },
-    handleEdit (jobID) {
+    editJob (jobID) {
       this.$router.push(`/jobs/${jobID}/edit`)
     },
-    handleDelete (jobID) {
+    deleteJob (jobID) {
       this.$store.dispatch('job/jobDelete', jobID)
     }
   }

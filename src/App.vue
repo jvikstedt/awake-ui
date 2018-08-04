@@ -1,16 +1,25 @@
 <template>
-  <el-container id="app">
-    <el-header>Awake</el-header>
-    <el-container direction="horizontal">
-      <el-aside>
-        Side
-      </el-aside>
-      <el-main>
-        <Flash />
-        <router-view/>
-      </el-main>
-    </el-container>
-  </el-container>
+  <v-app>
+    <v-navigation-drawer app />
+    <v-toolbar app />
+    <v-content>
+      <v-container fluid grid-list-sm>
+        <v-layout row wrap>
+          <v-flex d-flex xs12 order-xs5>
+            <v-layout column>
+              <v-flex d-flex>
+                <Flash />
+              </v-flex>
+              <v-flex d-flex>
+                <router-view />
+              </v-flex>
+            </v-layout>
+          </v-flex>
+        </v-layout>
+      </v-container>
+    </v-content>
+    <v-footer app />
+  </v-app>
 </template>
 
 <script>
@@ -22,23 +31,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss">
-  body {
-    background-color: #DCDFE6;
-  }
-  .el-aside {
-    border: 1px solid #606266;
-  }
-  .el-main {
-    border: 1px solid #606266;
-  }
-  .el-header {
-    border: 1px solid #606266;
-  }
-
-  #app {
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-</style>
