@@ -36,4 +36,9 @@ export default {
   .el-header {
     border: 1px solid #606266;
   }
+
+  #app {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
 </style>
