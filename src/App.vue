@@ -24,13 +24,16 @@ export default {
 </script>
 
 <style lang="scss">
+  body {
+    background-color: #DCDFE6;
+  }
   .el-aside {
-    background-color: gray;
+    border: 1px solid #606266;
   }
   .el-main {
-    background-color: green;
+    border: 1px solid #606266;
   }
   .el-header {
-    background-color: pink;
+    border: 1px solid #606266;
   }
 </style>
