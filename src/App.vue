@@ -3,14 +3,14 @@
     <v-navigation-drawer app />
     <v-toolbar app />
     <v-content>
-      <v-container fluid grid-list-sm>
-        <v-layout row wrap>
-          <v-flex d-flex xs12 order-xs5>
+      <v-container>
+        <v-layout>
+          <v-flex>
             <v-layout column>
-              <v-flex d-flex>
+              <v-flex>
                 <Flash />
               </v-flex>
-              <v-flex d-flex>
+              <v-flex>
                 <router-view />
               </v-flex>
             </v-layout>
