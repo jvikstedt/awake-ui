@@ -1,6 +1,6 @@
 <template>
   <div>
-    <JobForm :initialJob="{}" @onSave="jobCreate" />
+    <JobForm :initialJob="job" @onSave="jobCreate" />
   </div>
 </template>
 
@@ -11,6 +11,24 @@ import JobForm from '@/job/components/JobForm'
 const { mapActions } = createNamespacedHelpers('job')
 
 export default {
+  data: () => ({
+    job: {
+      name: 'test',
+      cron: '@every 15m',
+      stepConfigs: [
+        {
+          tag: 'foo',
+          variables: {
+            actual: { type: 'dynamic', val: '${0:code}' },
+            expected: { type: 'integer', val: 200 }
+          }
+        },
+        {
+          tag: 'foo2'
+        }
+      ]
+    }
+  }),
   methods: {
     ...mapActions([
       'jobCreate'
