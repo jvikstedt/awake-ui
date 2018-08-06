@@ -2,7 +2,14 @@
   <v-form>
     <v-text-field v-model="job.name" label="Name" required />
     <v-text-field v-model="job.cron" label="Cron" />
-    <StepConfig v-for="(sc, index) in job.stepConfigs" :stepConfig="sc" :key="index" />
+    <v-expansion-panel>
+      <v-expansion-panel-content v-for="(sc, index) in job.stepConfigs" :key="index">
+        <div slot="header">{{index}}</div>
+        <v-card>
+          <StepConfig :stepConfig="sc" />
+        </v-card>
+      </v-expansion-panel-content>
+    </v-expansion-panel>
     <v-btn color="info" @click="onSaveClick">Save</v-btn>
   </v-form>
 </template>
