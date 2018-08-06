@@ -6,11 +6,11 @@
           <v-text-field v-model="stepConfig.tag" label="Tag" required />
         </v-flex>
         <template v-for="(value, key) in stepConfig.variables">
-          <v-flex sm6 :key="key + '-val'">
-            <v-text-field solo :value="stepConfig.variables[key].val" @input="(val) => onVariablesValChange(key, val)"/>
+          <v-flex pr-1 sm6 :key="key + '-val'">
+            <v-text-field outline label="Name" :value="stepConfig.variables[key].val" @input="(val) => onVariablesValChange(key, val)" />
           </v-flex>
-          <v-flex sm6 :key="key + '-type'">
-            <v-text-field solo :value="stepConfig.variables[key].type" @input="(val) => onVariablesTypeChange(key, val)"/>
+          <v-flex pl-1 sm6 :key="key + '-type'">
+            <v-text-field outline label="Type" :value="stepConfig.variables[key].type" @input="(val) => onVariablesTypeChange(key, val)" />
           </v-flex>
         </template>
       </v-layout>
