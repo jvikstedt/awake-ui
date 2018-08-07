@@ -1,7 +1,14 @@
 <template>
   <v-form>
-    <v-text-field v-model="job.name" label="Name" required />
-    <v-text-field v-model="job.cron" label="Cron" />
+    <v-layout row wrap>
+      <v-flex pr-2 sm6>
+        <v-text-field v-model="job.name" label="Name" required />
+      </v-flex>
+      <v-flex pl-2 sm6>
+        <v-text-field v-model="job.cron" label="Cron" />
+      </v-flex>
+    </v-layout>
+    <v-switch :label="job.active ? 'Enabled' : 'Disabled̈́'" v-model="job.active" />
     <v-expansion-panel expand>
       <v-expansion-panel-content v-for="(sc, index) in job.stepConfigs" :key="index">
         <div slot="header">{{index}}</div>
@@ -10,8 +17,12 @@
         </v-card>
       </v-expansion-panel-content>
     </v-expansion-panel>
-    <v-btn @click="addNewStepConfig">Add</v-btn>
-    <v-btn color="info" @click="onSaveClick">Save</v-btn>
+    <v-layout row wrap pt-2>
+      <v-flex sm12>
+        <v-btn @click="addNewStepConfig">Add Step</v-btn>
+        <v-btn color="info" @click="onSaveClick">Save</v-btn>
+      </v-flex>
+    </v-layout>
   </v-form>
 </template>
 
