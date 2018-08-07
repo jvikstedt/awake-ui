@@ -10,6 +10,7 @@
         </v-card>
       </v-expansion-panel-content>
     </v-expansion-panel>
+    <v-btn @click="addNewStepConfig">Add</v-btn>
     <v-btn color="info" @click="onSaveClick">Save</v-btn>
   </v-form>
 </template>
@@ -27,6 +28,12 @@ export default {
   methods: {
     onSaveClick () {
       this.$emit('onSave', this.job)
+    },
+    addNewStepConfig () {
+      this.job = {
+        ...this.job,
+        stepConfigs: [...this.job.stepConfigs, { tag: '', variables: {} }]
+      }
     }
   },
   components: {
