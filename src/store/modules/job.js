@@ -2,7 +2,8 @@ import api from '@/api'
 import router from '@/router'
 
 import {
-  ERROR_TRIGGERED
+  ERROR_TRIGGERED,
+  SUCCESS_MESSAGE
 } from '@/store/types'
 
 const JOB_RESET = 'JOB_RESET'
@@ -63,6 +64,7 @@ const actions = {
 
       commit(JOB_RESET)
       commit(JOB_CREATE_SUCCESS, job)
+      commit(SUCCESS_MESSAGE, `Job (${jobData.name}) created succesfully!`, { root: true })
       router.push('/jobs')
     } catch (e) {
       commit(ERROR_TRIGGERED, e, { root: true })
@@ -74,6 +76,7 @@ const actions = {
 
       commit(JOB_RESET)
       commit(JOB_UPDATE_SUCCESS, job)
+      commit(SUCCESS_MESSAGE, `Job (${jobData.name}) updated succesfully!`, { root: true })
     } catch (e) {
       commit(ERROR_TRIGGERED, e, { root: true })
     }
@@ -82,6 +85,7 @@ const actions = {
     try {
       const response = await api.delete(`/jobs/${jobID}`)
       commit(JOB_DELETE_SUCCESS, response)
+      commit(SUCCESS_MESSAGE, `Job (${response.name}) deleted succesfully!`, { root: true })
     } catch (e) {
       commit(ERROR_TRIGGERED, e, { root: true })
     }
