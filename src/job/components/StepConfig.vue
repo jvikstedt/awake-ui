@@ -2,11 +2,11 @@
   <div>
     <v-container>
       <v-layout row wrap>
-        <v-flex xs12 sm12 :key="key + '-val'">
+        <v-flex xs12 sm12 :key="stepConfig.tag">
           <v-text-field v-model="stepConfig.tag" label="Tag" required />
         </v-flex>
         <template v-for="(value, key) in stepConfig.variables">
-          <v-flex pr-1 sm2 :key="key + '-val'">
+          <v-flex pr-1 sm2 :key="key + '-label'">
             <p>{{ key }}</p>
             <v-btn @click="() => removeVariableByKey(key)">X</v-btn>
           </v-flex>
@@ -18,10 +18,10 @@
           </v-flex>
         </template>
 
-        <v-flex sm2>
+        <v-flex sm2 key="new-variable-label">
           <v-text-field outline label="Name" v-model="newVariableName" />
         </v-flex>
-        <v-flex sm2>
+        <v-flex sm2 key="new-variable">
           <v-btn @click="addNewVariable">Add</v-btn>
         </v-flex>
       </v-layout>
