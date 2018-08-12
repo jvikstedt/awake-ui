@@ -2,7 +2,7 @@
   <div>
     <v-container>
       <v-layout row wrap>
-        <v-flex xs12 sm12 :key="stepConfig.tag">
+        <v-flex xs12 sm12>
           <v-text-field v-model="stepConfig.tag" label="Tag" required />
         </v-flex>
         <template v-for="(value, key) in stepConfig.variables">
