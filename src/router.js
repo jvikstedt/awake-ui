@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import JobListPage from './job/JobListPage.vue'
 import JobNewPage from './job/JobNewPage.vue'
 import JobEditPage from './job/JobEditPage.vue'
+import ResultListPage from './result/ResultListPage.vue'
 
 Vue.use(Router)
 
@@ -28,6 +29,11 @@ export default new Router({
       path: '/jobs/:id/edit',
       name: 'editjob',
       component: JobEditPage
+    },
+    {
+      path: '/results',
+      name: 'results',
+      component: ResultListPage
     }
   ]
 })
